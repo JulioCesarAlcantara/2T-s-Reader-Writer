@@ -21,6 +21,9 @@ class Writer(Frame, object):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
+        self.a = Things
+        self.b = self.a.searchLocations ('asdfasdfasdfz')
+
         # Definições de titulos, largura
         # e altura da janela principal
         self.tree = None
@@ -72,7 +75,6 @@ class Writer(Frame, object):
         a = Things
         b = a.searchLocations ('asdfasdfasdfz')
 
-
         locations = [('Choose a location...')]
         locationsId = []
         for c in b:
@@ -101,6 +103,10 @@ class Writer(Frame, object):
 
     def verificaLocalizacao(self):
 
+        # print(self.locationBox.get())
+        # selected = [a for a in self.b if a.loca_room == self.locationBox.get()]
+        # print(selected[0].loca_id)
+        #
         if self.locationBox.get() == "Choose a location...":
             mens = messages
             mens.messageError("Select a location !")
@@ -138,7 +144,7 @@ class Writer(Frame, object):
             self.tree.insert('', 'end', values=item)
             # adjust column's width if necessary to fit each value
             for ix, val in enumerate(item):
-                col_w = tkFont.Font().measure(val)+50
+                col_w = tkFont.Font().measure(val)
                 if self.tree.column(car_header[ix],width=None)<col_w:
                     self.tree.column(car_header[ix], width=col_w)
 
@@ -164,7 +170,7 @@ dados = things.searchThingsByLocation('asdfasdfasdfz', '7')
 car_list = []
 for b in dados:
     # print(b.code_things, b.description, b.location, b.state)
-    car_list.append([b.code_things, b.description, b.location, b.state])
+    car_list.append([b.code_things, b.description, b.location['loca_room'], b.state])
 
 if __name__ == '__main__':
     root = tk.Tk()
