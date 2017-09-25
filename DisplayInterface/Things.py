@@ -66,7 +66,7 @@ def activeThingByNumber(token, thingNumber):
 
 
 
-def searchThingsByLocation(token, idLocation):
+def searchThingsByLocation(token=None, idLocation=None):
     try:
         response = requests.get(url + "search_things_by_location/token=" + token + "&locaid=" + idLocation)
         data = response.json()

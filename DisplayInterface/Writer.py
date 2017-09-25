@@ -17,7 +17,7 @@ button_default_config = {
 class Writer(Frame, object):
     """ Janela principal """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None , token=None):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
@@ -25,6 +25,7 @@ class Writer(Frame, object):
         self.a = Things
         self.b = self.a.searchLocations ('asdfasdfasdfz')
         self.car_list = []
+
         # Definições de titulos, largura
         # e altura da janela principal
         self.tree = None
@@ -54,7 +55,7 @@ class Writer(Frame, object):
 
     def botaoFilter1(self):
         self.reader = Button(master, text="Search", **button_default_config)
-        self.reader["command"] = self.verificaLocalizacao
+        # self.reader["command"] = self.verificaLocalizacao
         self.reader.grid(column= 3, row=2)
 
     def botaoFilter2(self):
@@ -73,17 +74,15 @@ class Writer(Frame, object):
         self.reader.grid(column= 1, row=10)
 
     def combo(self, dados=None):
-        a = Things
-        b = a.searchLocations ('asdfasdfasdfz')
+        # a = Things
+        # b = a.searchLocations ('asdfasdfasdfz')
+        location = self.b
 
         locations = [('Choose a location...')]
-        locationsId = []
-        for c in b:
+        for c in location:
             locations.append (c.loca_room)
-            # print("aqui :" + c.loca_id)
 
         self.box_value = StringVar ()
-        # self.locationBox = ttk.Combobox (self.master, state="readonly", choices=locationsId, values=locations)
         self.locationBox = Combobox (self.master, textvariable=self.box_value)
         self.locationBox.bind ("<<ComboboxSelected>>")
 
@@ -105,13 +104,14 @@ class Writer(Frame, object):
     def verificaLocalizacao(self):
 
         # print(self.locationBox.get())
-        # selected = [a for a in self.b if a.loca_room == self.locationBox.get()]
+        selected = [a for a in self.b if a.loca_room == self.locationBox.get()]
         # print(selected[0].loca_id)
         #
         if self.locationBox.get() == "Choose a location...":
             mens = messages
             mens.messageError("Select a location !")
         else:
+
             selected = [a for a in self.b if a.loca_room == self.locationBox.get ()]
             things = Things
             dados = things.searchThingsByLocation (self.token, str(selected[0].loca_id))
@@ -174,23 +174,16 @@ def sortby(tree, col, descending):
 
 car_header = ['Code','Name','Location', 'Status']
 
-# things = Things
-# dados = things.searchThingsByLocation('asdfasdfasdfz', '7')
-# car_list = []
-# for b in dados:
-#     # print(b.code_things, b.description, b.location, b.state)
-#     car_list.append([b.code_things, b.description, b.location['loca_room'], b.state])
+things = Things
+dados = things.searchThingsByLocation('asdfasdfasdfz', '7')
 
+car_list = []
+for b in dados:
+    # print(b.code_things, b.description, b.location, b.state)
+    car_list.append([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
 
-
-#comentário aqui
 
 if __name__ == '__main__':
     root = tk.Tk()
     window = Writer()
     window.mainloop()
-
-    # root = tk.Tk()
-    #
-    # mc_listbox = Window()
-    # root.mainloop()
