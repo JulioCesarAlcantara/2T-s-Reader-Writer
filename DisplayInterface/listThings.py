@@ -9,7 +9,7 @@ button_default_config = {
     "fg": "white"
 }
 
-class App:
+class ListThings:
 
     value_of_combo = 'X'
 

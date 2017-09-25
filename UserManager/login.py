@@ -8,7 +8,7 @@ import requests
 from Model.UserModel import UserModel
 
 
-class Login:
+class Login():
     def __init__(self, master=None):
         self.fontePadrao = ("Arial", "10")
         self.primeiroContainer = Frame (master)

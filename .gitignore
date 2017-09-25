@@ -1,2 +1,5 @@
 .idea
-*.pyc
+DisplayInterface/__pycache__/Things.cpython-35.pyc
+DisplayInterface/__pycache__/messages.cpython-35.pyc
+Model/__pycache__/UserModel.cpython-35.pyc
+
