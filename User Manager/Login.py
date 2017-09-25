@@ -1,5 +1,7 @@
 # from DisplayInterface.Reader import tk
 from tkinter import *
+from DisplayInterface.messages import *
+from DisplayInterface.welcome import Window
 
 import requests
 
@@ -61,7 +63,7 @@ class Login:
         usuario = self.nome.get ()
         senha = self.senha.get ()
 
-        self.autenticaUser(usuario, senha)
+        autentica = self.autenticaUser(usuario, senha)
 
 
 
@@ -70,19 +72,22 @@ class Login:
             url="https://dg-2ts-server.herokuapp.com/"
             response = requests.get(url + "user_autenticate/email=" + email + "&password=" + senha)
             data = response.json()
-            print(data)
+            #print(data)
 
             if response.ok:
                 try:
                     if data["response"] == None:
-                        print("Aqui")
+                        messageError ('Nenhum Usuário Encontrado !!')
                     else :
-                        print(data["response"])
+                        messageError ('Nenhum Usuário Encontrado !!')
+                        #print(data["response"])
                 except Exception as e:
-                    u = UserModel (**data)
-                    print (u.token)
+                    user = UserModel (**data)
+                    root.destroy ()
+                    window = Window (user.token, user.name)
+                    window.mainloop ()
         except Exception as e:
-            print("Erro no Servidor")
+            messageError ('Erro no servidor, contate o analista reponsável !')
 
 
 root = Tk()

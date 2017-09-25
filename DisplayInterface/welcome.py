@@ -12,7 +12,7 @@ button_default_config = {
 class Window(Frame):
     """ Janela principal """
 
-    def __init__(self):
+    def __init__(self, token =NONE, name=NONE):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
@@ -24,7 +24,7 @@ class Window(Frame):
         #########################################
 
         msg = Label(self, text="Raspberry PI Reader Prototype")
-        msg2 = Label(self, text="Welcome, user. This prototype will\n help you in controlling patrimony.")
+        msg2 = Label(self, text="Welcome,"+ name +". This prototype will\n help you in controlling patrimony.")
         msgmenu = Label(self, text="Menu")
         msg.grid(row=0, column=1, sticky=NSEW)
         msg2.grid(row=5, column=1, sticky=NSEW)
@@ -71,6 +71,6 @@ class Window(Frame):
         # Epacotamos o frame na janela
         self.pack(fill=BOTH, expand=True)
 
-if __name__ == '__main__':
-    window = Window()
-    window.mainloop()
+# if __name__ == '__main__':
+#     window = Window()
+#     window.mainloop()
