@@ -24,7 +24,7 @@ class Window(Frame):
         #########################################
 
         msg = Label(self, text="Raspberry PI Reader Prototype")
-        msg2 = Label(self, text="Welcome,"+ name +". This prototype will\n help you in controlling patrimony.")
+        msg2 = Label(self, text="Welcome, "+ name+ ". This prototype will\n help you in controlling patrimony.")
         msgmenu = Label(self, text="Menu")
         msg.grid(row=0, column=1, sticky=NSEW)
         msg2.grid(row=5, column=1, sticky=NSEW)
