@@ -21,13 +21,14 @@ class Writer(Frame, object):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
+        self.token = 'asdfasdfasdfz'
         self.a = Things
         self.b = self.a.searchLocations ('asdfasdfasdfz')
-
+        self.car_list = []
         # Definições de titulos, largura
         # e altura da janela principal
         self.tree = None
-        self.master.geometry ("600x500")
+        self.master.geometry ("600x700")
         self.master.title ("Writer")
 
         titulo=Label (master, text="Writer", font="Arial 60 normal")
@@ -79,7 +80,7 @@ class Writer(Frame, object):
         locationsId = []
         for c in b:
             locations.append (c.loca_room)
-            print("aqui :" + c.loca_id)
+            # print("aqui :" + c.loca_id)
 
         self.box_value = StringVar ()
         # self.locationBox = ttk.Combobox (self.master, state="readonly", choices=locationsId, values=locations)
@@ -111,6 +112,14 @@ class Writer(Frame, object):
             mens = messages
             mens.messageError("Select a location !")
         else:
+            selected = [a for a in self.b if a.loca_room == self.locationBox.get ()]
+            things = Things
+            dados = things.searchThingsByLocation (self.token, str(selected[0].loca_id))
+
+            for b in dados:
+                # print(b.code_things, b.description, b.location, b.state)
+                self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
+
             self._setup_widgets ()
             self._build_tree ()
 
@@ -140,7 +149,7 @@ class Writer(Frame, object):
             # adjust the column's width to the header string
             self.tree.column(col,
                 width=tkFont.Font().measure(col.title()))
-        for item in car_list:
+        for item in self.car_list:
             self.tree.insert('', 'end', values=item)
             # adjust column's width if necessary to fit each value
             for ix, val in enumerate(item):
@@ -154,7 +163,7 @@ def sortby(tree, col, descending):
     data = [(tree.set(child, col), child) \
         for child in tree.get_children('')]
     # if the data to be sorted is numeric change to float
-    #data =  change_numeric(data)
+    # data =  change_numeric(data)
     # now sort the data in place
     data.sort(reverse=descending)
     for ix, item in enumerate(data):
@@ -165,12 +174,16 @@ def sortby(tree, col, descending):
 
 car_header = ['Code','Name','Location', 'Status']
 
-things = Things
-dados = things.searchThingsByLocation('asdfasdfasdfz', '7')
-car_list = []
-for b in dados:
-    # print(b.code_things, b.description, b.location, b.state)
-    car_list.append([b.code_things, b.description, b.location['loca_room'], b.state])
+# things = Things
+# dados = things.searchThingsByLocation('asdfasdfasdfz', '7')
+# car_list = []
+# for b in dados:
+#     # print(b.code_things, b.description, b.location, b.state)
+#     car_list.append([b.code_things, b.description, b.location['loca_room'], b.state])
+
+
+
+#comentário aqui
 
 if __name__ == '__main__':
     root = tk.Tk()

@@ -114,7 +114,7 @@ def searchLocations(token):
 # searchThingsInactives('sdfsdf')
 # activeThingByNumber('asdfasdfasdfz', '88670')
 # dados = searchThingsByLocation('asdfasdfasdfz', '7')
-dados = searchLocations('asdfasdfasdfz')
-#
-for b in dados:
-    print(b)
+# dados = searchLocations('asdfasdfasdfz')
+# #
+# for b in dados:
+#     print(b)
