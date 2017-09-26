@@ -1,15 +1,15 @@
-# from DisplayInterface.Reader import tk
+import requests
 from tkinter import *
 from DisplayInterface.messages import *
-from DisplayInterface.welcome import *
-
-import requests
+from DisplayInterface.welcome import boasVindas
 
 from Model.UserModel import UserModel
 
 
 class Login():
+
     def __init__(self, master=None):
+
         self.fontePadrao = ("Arial", "10")
         self.primeiroContainer = Frame (master)
         self.primeiroContainer["pady"] = 10
@@ -60,10 +60,10 @@ class Login():
 
     # Método verificar senha
     def verificaSenha(self):
-        usuario = self.nome.get ()
-        senha = self.senha.get ()
+        usuario = self.nome.get()
+        senha = self.senha.get()
 
-        autentica = self.autenticaUser(usuario, senha)
+        self.autenticaUser(usuario, senha)
 
 
 
@@ -71,9 +71,7 @@ class Login():
         try:
             url="https://dg-2ts-server.herokuapp.com/"
             response = requests.get(url + "user_autenticate/email=" + email + "&password=" + senha)
-            print(url + "user_autenticate/email=" + email + "&password=" + senha)
             data = response.json()
-            print(data)
 
             if response.ok:
                 try:
@@ -83,12 +81,14 @@ class Login():
                         messageError ('Nenhum Usuário Encontrado !!')
                         #print(data["response"])
                 except Exception as e:
+                    print("aqui 1")
                     user = UserModel (**data)
-                    root.destroy ()
-                    window = Window(user.token, user.name)
-                    window.mainloop ()
+                    root.destroy()
+                    windows = boasVindas (user.token, user.name)
+                    windows.mainloop()
         except Exception as e:
             messageError ('Erro no servidor, contate o analista reponsável !')
+            print(e.with_traceback())
 
 
 root = Tk()
