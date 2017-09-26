@@ -9,7 +9,7 @@ button_default_config = {
     "fg": "white"
 }
 
-class ListThings:
+class ListThings():
 
     value_of_combo = 'X'
 
@@ -116,5 +116,5 @@ car_list = [
 
 if __name__ == '__main__':
     root = Tk()
-    app = App(root)
+    app = ListThings(root)
     root.mainloop()
