@@ -37,40 +37,6 @@ class Window(Frame):
         self.buttonSynchronize ()
         self.buttonQuit ()
 
-        # Para os botões, definimos o texto e depois passamos o
-        # dicionario de atributos usando "**" para o botão
-        # button1 = Button(self, text="Reader", **button_default_config)
-
-        # Coloque cada botão em seu lugar e defina o
-        # preenchimento dele usando o NSEW que significa
-        # que o botão irá se ajustar ao tamanho dos items
-        # ao seu redor e dentro da sua própria celula.
-        # button1.grid(row=3, column=0, sticky=NSEW)
-
-        # Ao criar outro botão devemos fazer da mesma forma
-        # para que fique tudo igual, passaremos o mesmo
-        # dicionário de attributos que passamos ao primeiro
-        # button2 = Button(self, text="Writer", **button_default_config)
-
-        # Definimos outra fonte ao 2° botão, pois
-        # as celulas irão se ajustar automaticamente
-        #button2.configure(font="Arial 20 normal")
-
-        # Configurando novamente o grid
-        # button2.grid(row=4, column=0, sticky=NSEW)
-
-        ###############################################
-        # button3 = Button (self, text="List Things", **button_default_config)
-        # button3.grid(row=5, column=0, sticky=NSEW)
-        # button4 = Button(self, text="Synchronization", **button_default_config)
-        # button4.grid(row=6, column=0, sticky=NSEW)
-        # button5 = Button(self, text="Quit", **button_default_config, command=self.quit)
-        # button5.grid(row=7, column=0, sticky=NSEW)
-        ###############################################
-
-        # Essa é a parte mais importante, pois, define o
-        # esticamento de cada celula do grid. Se possivel
-        # comente as 2 linhas abaixo e teste para entender melhor
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=7)
 
