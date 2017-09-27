@@ -1,4 +1,6 @@
 from tkinter import *
+from DisplayInterface.reader import Reader
+from DisplayInterface.Writer import Writer
 
 # Guarda as configurações padrão para os
 # botões que serão definidos mais tarde
@@ -18,13 +20,14 @@ class Window(Frame):
 
         self.token = token
         self.name = name
+        self.id = id
         self.master.geometry("500x200")
         self.master.title("Welcome")
 
         #########################################
 
         msg = Label(self, text="Raspberry PI Reader Prototype")
-        msg2 = Label(self, text="Welcome, "+ self.name +". This prototype will\n help you in controlling patrimony.")
+        msg2 = Label(self, text="Welcome, teste. This prototype will\n help you in controlling patrimony.")
         msgmenu = Label(self, text="Menu")
         msg.grid(row=0, column=1, sticky=NSEW)
         msg2.grid(row=5, column=1, sticky=NSEW)
@@ -65,15 +68,15 @@ class Window(Frame):
 
     def callReader(self, token=None):
         global window
-        # self.destroy ()
-        # reader = Reader ()
-        # window.mainloop ()
+        self.destroy ()
+        reader = Reader (self.token)
+        window.mainloop ()
 
     def callWriter(self, token=None):
         global window
-        # self.destroy ()
-        # writer = Writer ()
-        # writer.mainloop ()
+        self.destroy ()
+        writer = Writer (None, self.token, self.id)
+        writer.mainloop ()
 
     def callListThings(self, token=None):
         global window

@@ -14,16 +14,20 @@ button_default_config = {
 }
 
 
-class Writer(Frame, object):
+class Writer(Frame):
     """ Janela principal """
 
-    def __init__(self, parent=None , token=None):
+    token1 = ""
+    id1 =""
+
+    def __init__(self, parent=None , token=None, id=None):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
-        self.token = 'asdfasdfasdfz'
+        self.token =token
+
         self.a = Things
-        self.b = self.a.searchLocations ('asdfasdfasdfz')
+        self.b = self.a.searchLocations (token)
         self.car_list = []
 
         # Definições de titulos, largura
@@ -104,7 +108,7 @@ class Writer(Frame, object):
     def verificaLocalizacao(self):
 
         # print(self.locationBox.get())
-        selected = [a for a in self.b if a.loca_room == self.locationBox.get()]
+        # selected = [a for a in self.b if a.loca_room == self.locationBox.get()]
         # print(selected[0].loca_id)
         #
         if self.locationBox.get() == "Choose a location...":
@@ -120,8 +124,9 @@ class Writer(Frame, object):
                 # print(b.code_things, b.description, b.location, b.state)
                 self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
 
-            self._setup_widgets ()
-            self._build_tree ()
+        self._setup_widgets ()
+        self._build_tree ()
+        self.car_list.append ([])
 
     def _setup_widgets(self):
 
@@ -174,16 +179,21 @@ def sortby(tree, col, descending):
 
 car_header = ['Code','Name','Location', 'Status']
 
-things = Things
-dados = things.searchThingsByLocation('asdfasdfasdfz', '7')
 
 car_list = []
-for b in dados:
-    # print(b.code_things, b.description, b.location, b.state)
-    car_list.append([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
+
+# global token1
+# global id1
+#
+# things = Things
+# dados =  things.searchThingsByLocation ("asdfasdfasdfz", "7")
+#
+# for b in dados:
+#     # print(b.code_things, b.description, b.location, b.state)
+#     car_list.append([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
 
 
-if __name__ == '__main__':
-    root = tk.Tk()
-    window = Writer()
-    window.mainloop()
+# if __name__ == '__main__':
+#     root = tk.Tk()
+#     window = Writer()
+#     window.mainloop(

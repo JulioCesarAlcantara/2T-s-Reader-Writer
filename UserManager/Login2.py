@@ -4,6 +4,7 @@ from DisplayInterface.Welcome2 import Window
 
 import requests
 
+from DisplayInterface.messages import messageError
 from Model.UserModel import UserModel
 
 
@@ -75,18 +76,17 @@ class Login:
 
             if response.ok:
                 try:
-                    if data["response"] == None:
-                        print("Aqui")
-                    else :
-                        print(data["response"])
+                    if data["response"] == 'Nenhum usuario encontrado':
+                        messageError ('Nenhum Usuário Encontrado !!')
+                    elif data["response"] == 'ERRO':
+                        messageError ('Erro no servidor !!')
                 except Exception as e:
                     user = UserModel (**data)
                     root.destroy ()
                     windows = Window (user.token, user.name)
                     windows.mainloop ()
         except Exception as e:
-            print("Erro no Servidor")
-            print(e)
+            messageError ('Erro no servidor. Contate o analista responsável !!')
 
 
 root = Tk()

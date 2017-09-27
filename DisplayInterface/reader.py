@@ -17,7 +17,7 @@ button_default_config = {
 class Reader(Frame, object):
     """ Janela principal """
 
-    def __init__(self, parent=None, token=None):
+    def __init__(self, token=None):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
@@ -33,7 +33,7 @@ class Reader(Frame, object):
         locationLabel = Label (master, text="Location", font="Arial 15 normal")
         locationLabel.grid (column=1, row=2)
 
-        self.parent = parent
+        # self.parent = parent
         self.token = token
         self.combo(token)
         self.botaoReader()
