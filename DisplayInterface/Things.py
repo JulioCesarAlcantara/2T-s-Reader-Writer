@@ -19,8 +19,11 @@ def searchThingByNumber(token, thingNumber):
                 else:
                     print (data["response"])
             except Exception as e:
-                u = ThingsModel (**data)
-                print (u.description)
+                things = []
+                for dado in data:
+                    things.append (ThingsModel (**dado))
+
+                return things
     except Exception as e:
         print ("Erro no Servidor")
 
