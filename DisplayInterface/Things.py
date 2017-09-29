@@ -37,8 +37,11 @@ def searchThingsInactives(token):
                 else:
                     print("Things: " + data["response"])
             except Exception as e:
+                things = []
                 for dado in data:
-                    print(dado)
+                    things.append (ThingsModel (**dado))
+
+                return things
 
     except Exception as e :
         print("Server Error")
@@ -59,14 +62,18 @@ def activeThingByNumber(token, thingNumber):
                         else:
                             print ("Unable to activate tag !!")
                 except Exception as e:
-                    print (e)
+                    things = []
+                    for dado in data:
+                        things.append (ThingsModel (**dado))
+
+                    return things
 
         except Exception as e:
             print ("Server Error !!")
 
 
 
-def searchThingsByLocation(token=None, idLocation=None):
+def searchThingsByLocation(token, idLocation):
 
     try:
         response = requests.get(url + "search_things_by_location/token=" + token + "&locaid=" + idLocation)
