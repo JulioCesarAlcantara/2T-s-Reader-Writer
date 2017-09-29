@@ -9,8 +9,9 @@ def searchThingByNumber(token, thingNumber):
     try:
 
         response = requests.get (url + "search_things_by_num/token=" + token +"&num=" + thingNumber)
+        print (url + "search_things_by_num/token=" + token + "&num=" + thingNumber)
         data = response.json ()
-        # print (data)
+        print (data)
 
         if response.ok:
             try:
@@ -19,14 +20,14 @@ def searchThingByNumber(token, thingNumber):
                 else:
                     print (data["response"])
             except Exception as e:
-                things = []
-                for dado in data:
-                    things.append (ThingsModel (**dado))
+                things = [data]
+                # for dado in data:
+                #     things.append (ThingsModel (**dado))
 
                 return things
     except Exception as e:
-        print ("Erro no Servidor")
-
+        print ("Erro no Servidor !!")
+        print(e)
 
 def searchThingsInactives(token):
     try:
@@ -161,7 +162,7 @@ def searchThingsActivesByLocation(token, loca_id):
     except Exception as e:
         print ("Erro no Servidor")
 
-# searchThingByNumber('asdfasdfasdfz', '88670')
+searchThingByNumber('asdfasdfasdfz', '88670')
 # searchThingsInactives('sdfsdf')
 # activeThingByNumber('asdfasdfasdfz', '88670')
 # dados = searchThingsByLocation('asdfasdfasdfz', '7')
