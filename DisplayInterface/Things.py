@@ -121,6 +121,46 @@ def searchLocations(token):
     except Exception as e:
         print ("Erro no Servidor")
 
+def searchThingsInactivesByLocation(token, loca_id):
+    try:
+        response = requests.get (url + "search_things_inactived_by_location/token=" + token + "&locaid=" + loca_id)
+        data = response.json ()
+
+        if response.ok:
+            try:
+                if data["response"] == None:
+                    print ("Aqui")
+                else:
+                    print (data["response"])
+            except Exception as e:
+                things = []
+                for dado in data:
+                    things.append (ThingsModel (**dado))
+
+                return things
+    except Exception as e:
+        print ("Erro no Servidor")
+
+def searchThingsActivesByLocation(token, loca_id):
+    try:
+        response = requests.get (url + "search_things_actived_by_location/token=" + token + "&locaid=" + loca_id)
+        data = response.json ()
+
+        if response.ok:
+            try:
+                if data["response"] == None:
+                    print ("Aqui")
+                else:
+                    print (data["response"])
+            except Exception as e:
+                things = []
+                for dado in data:
+                    things.append (ThingsModel (**dado))
+
+                return things
+    except Exception as e:
+        print ("Erro no Servidor")
+
 # searchThingByNumber('asdfasdfasdfz', '88670')
 # searchThingsInactives('sdfsdf')
 # activeThingByNumber('asdfasdfasdfz', '88670')
