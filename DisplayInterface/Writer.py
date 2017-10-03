@@ -59,7 +59,7 @@ class Writer(Frame):
 
     def botaoFilter1(self):
         self.reader = Button(master, text="Search", **button_default_config)
-        # self.reader["command"] = self.verificaLocalizacao
+        self.reader["command"] = self.verificaCodigo
         self.reader.grid(column= 3, row=2)
 
     def botaoFilter2(self):
@@ -105,13 +105,34 @@ class Writer(Frame):
         self.code["font"] = self.fontePadrao
         self.code.grid ()
 
+
+    def verificaCodigo(self):
+        print(self.code.get())
+        if self.code.get() == "":
+            mens = messages
+            mens.messageError("Type a code !")
+        else:
+            code = self.code.get ()
+            things = Things
+            dado = things.searchThingByNumber (self.token, code)
+            b = dado[0]
+            print(b.code_things)
+
+            #for b in dados:
+                # print(b.code_things, b.description, b.location, b.state)
+        self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
+
+        self._setup_widgets ()
+        self._build_tree ()
+        self.car_list.append ([])
+
     def verificaLocalizacao(self):
 
         # print(self.locationBox.get())
         # selected = [a for a in self.b if a.loca_room == self.locationBox.get()]
         # print(selected[0].loca_id)
         #
-        if self.locationBox.get() == "Choose a location...":
+        if self.locationBox.get () == "Choose a location...":
             mens = messages
             mens.messageError("Select a location !")
         else:
