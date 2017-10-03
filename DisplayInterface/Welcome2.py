@@ -1,4 +1,6 @@
 from tkinter import *
+
+from DisplayInterface.listThings import ListThings
 from DisplayInterface.reader import Reader
 from DisplayInterface.Writer import Writer
 
@@ -80,9 +82,9 @@ class Window(Frame):
 
     def callListThings(self, token=None):
         global window
-        # self.destroy ()
-        # listThings = ListThings ()
-        # listThings.mainloop ()
+        self.destroy ()
+        listThings = ListThings (token=token)
+        listThings.mainloop ()
 
     def callSynchronize(self, token=None):
         global window

@@ -5,6 +5,7 @@ from Model.ThingsModel import ThingsModel
 
 url = "https://dg-2ts-server.herokuapp.com/"
 
+
 def searchThingByNumber(token, thingNumber):
     try:
 
@@ -20,7 +21,7 @@ def searchThingByNumber(token, thingNumber):
                 else:
                     print (data["response"])
             except Exception as e:
-                things = [data]
+                things = [ThingsModel (**data)]
                 # for dado in data:
                 #     things.append (ThingsModel (**dado))
 
@@ -32,6 +33,27 @@ def searchThingByNumber(token, thingNumber):
 def searchThingsInactives(token):
     try:
         response = requests.get(url + "search_all_things_inactived/token=" + token)
+        data = response.json()
+
+        if response.ok:
+            try:
+                if data["response"] == None:
+                    print ("Nothing found !!")
+                else:
+                    print("Things: " + data["response"])
+            except Exception as e:
+                things = []
+                for dado in data:
+                    things.append (ThingsModel (**dado))
+
+                return things
+
+    except Exception as e :
+        print("Server Error")
+
+def searchThingsActived(token):
+    try:
+        response = requests.get(url + "search_all_things_actived/token=" + token)
         data = response.json()
 
         if response.ok:
@@ -162,7 +184,13 @@ def searchThingsActivesByLocation(token, loca_id):
     except Exception as e:
         print ("Erro no Servidor")
 
-searchThingByNumber('asdfasdfasdfz', '88670')
+# a = ThingsModel
+a = searchThingByNumber('asdfasdfasdfz', '88670')
+b = []
+b.append([a[0].code_things, a[0].tag_activated ])
+
+print(b)
+
 # searchThingsInactives('sdfsdf')
 # activeThingByNumber('asdfasdfasdfz', '88670')
 # dados = searchThingsByLocation('asdfasdfasdfz', '7')
