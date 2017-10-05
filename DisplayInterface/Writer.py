@@ -5,6 +5,8 @@ from tkinter import ttk
 from tkinter import *
 from tkinter.ttk import Combobox
 
+from builtins import type
+
 from DisplayInterface import Things, messages
 
 button_default_config = {
@@ -20,7 +22,7 @@ class Writer(Frame):
     token1 = ""
     id1 =""
 
-    def __init__(self, parent=None , token=None, id=None):
+    def __init__(self, parent=None , token=None):
         """ Método construtor da janela"""
         super().__init__(master=None)  # Aqui iniciamos a nossa superclasse (Frame)
 
@@ -107,24 +109,34 @@ class Writer(Frame):
 
 
     def verificaCodigo(self):
-        print(self.code.get())
+        # print(self.code.get())
+        mens = messages
+        code = self.code.get ()
+
         if self.code.get() == "":
-            mens = messages
             mens.messageError("Type a code !")
+
+        elif int(code) == False:
+            mens.messageError("The value intered is not integer !")
         else:
-            code = self.code.get ()
             things = Things
-            dado = things.searchThingByNumber (self.token, code)
-            b = dado[0]
-            print(b.code_things)
+            dado = things.searchThingByNumber(self.token, str(code))
+            self.car_list.clear()
+            for b in dado:
+                if b.tag_activated == '1':
+                    mens.messageError("Tag not found. Tag is already active !")
+                else:
+                    self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
+                    self._setup_widgets ()
+                    self._build_tree ()
 
-            #for b in dados:
-                # print(b.code_things, b.description, b.location, b.state)
-        self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
 
-        self._setup_widgets ()
-        self._build_tree ()
-        self.car_list.append ([])
+
+    def is_int(self, val):
+        if type(val) == int:
+            return True
+        else:
+            return False
 
     def verificaLocalizacao(self):
 
@@ -140,15 +152,14 @@ class Writer(Frame):
             selected = [a for a in self.b if a.loca_room == self.locationBox.get ()]
             things = Things
             dados = things.searchThingsByLocation (self.token, str(selected[0].loca_id))
-
+            self.car_list.clear()
             for b in dados:
                 # print(b.code_things, b.description, b.location, b.state)
                 self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
 
-        self._setup_widgets ()
-        self._build_tree ()
-        self.car_list.append ([])
-
+            self._setup_widgets()
+            self._build_tree()
+            # self.car_list.append ([])
     def _setup_widgets(self):
 
         msg = ttk.Label(wraplength="4i",

@@ -71,13 +71,13 @@ class Window(Frame):
     def callReader(self, token=None):
         global window
         self.destroy ()
-        reader = Reader (self.token)
+        reader = Reader (token=token)
         window.mainloop ()
 
     def callWriter(self, token=None):
         global window
         self.destroy ()
-        writer = Writer (None, self.token, self.id)
+        writer = Writer (token=token)
         writer.mainloop ()
 
     def callListThings(self, token=None):
