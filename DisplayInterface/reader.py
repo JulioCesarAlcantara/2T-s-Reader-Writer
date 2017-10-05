@@ -57,12 +57,12 @@ class Reader(Frame, object):
         self.reader.grid(column= 3, row=2)
 
     def botaoSave(self):
-        self.reader = Button(self.parent, text="Save", **button_default_config)
+        self.reader = Button(self, text="Save", **button_default_config)
         # self.reader["command"] = self.verificaLocalizacao
         self.reader.grid(column= 3, row=10)
 
     def botaoBack(self):
-        self.reader = Button(self.parent, text="<< Back", **button_default_config)
+        self.reader = Button(self, text="<< Back", **button_default_config)
         # self.reader["command"] = self.verificaLocalizacao
         self.reader.grid(column= 1, row=10)
 
