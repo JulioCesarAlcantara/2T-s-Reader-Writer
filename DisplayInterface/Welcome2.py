@@ -46,6 +46,7 @@ class Window(Frame):
         self.columnconfigure(1, weight=7)
 
         # Epacotamos o frame na janela
+        # self.grid()
         self.pack(fill=BOTH, expand=True)
 
     def buttonReader(self):
@@ -72,7 +73,7 @@ class Window(Frame):
         global window
         self.destroy ()
         reader = Reader (token=token)
-        window.mainloop ()
+        reader.mainloop ()
 
     def callWriter(self, token=None):
         global window

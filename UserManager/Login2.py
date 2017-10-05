@@ -68,6 +68,7 @@ class Login:
 
 
     def autenticaUser(self, email, senha):
+
         try:
             url="https://dg-2ts-server.herokuapp.com/"
             response = requests.get(url + "user_autenticate/email=" + email + "&password=" + senha)
@@ -76,19 +77,20 @@ class Login:
 
             if response.ok:
                 try:
+                    print("AAAAAAAAA")
                     if data["response"] == 'Nenhum usuario encontrado':
                         messageError ('Nenhum Usuário Encontrado !!')
                     elif data["response"] == 'ERRO':
                         messageError ('Erro no servidor !!')
                 except Exception as e:
                     user = UserModel (**data)
-                    root.destroy ()
+                    root1.destroy ()
                     windows = Window (user.token, user.name)
                     windows.mainloop ()
         except Exception as e:
             messageError ('Erro no servidor. Contate o analista responsável !!')
 
 
-root = Tk()
-Login(root)
-root.mainloop()
+root1 = Tk()
+Login(root1)
+root1.mainloop()

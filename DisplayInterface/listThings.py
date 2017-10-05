@@ -5,6 +5,7 @@ import tkinter.ttk as ttk
 from tkinter.ttk import Combobox
 
 from DisplayInterface import Things, messages
+from DisplayInterface import Welcome2
 
 button_default_config = {
     "font": "Arial 10 normal",
@@ -25,7 +26,6 @@ class ListThings(Frame):
         self.label()
         self.comboLocation()
         self.comboStatus()
-        # self.botaoSearch1()
         self.botaoSearch2()
         self.botaoBack()
 
@@ -38,8 +38,9 @@ class ListThings(Frame):
         self.car_list = []
         self.car_header = ['Code', 'Name', 'Location', 'Status']
 
-        self._setup_widgets ()
-        self._build_tree ()
+        # self._setup_widgets ()
+        # self._build_tree ()
+        self.grid
 
 
     def botaoSearch1(self):
@@ -53,11 +54,25 @@ class ListThings(Frame):
         self.search2.grid(column=2, row=2)
 
     def botaoBack(self):
-        self.back = Button(self.parent, text="<< Back", **button_default_config)
-        self.back.grid(column=0, row=7)
+        self.button3 = Button (self.parent, text="<< Back", command=lambda: self.callWelcome(self.token),**button_default_config)
+        self.button3.grid (row=7, column=0, sticky=NSEW)
     def label(self):
         self.msg = Label(self.parent, text="List Things", font="Arial 20 normal")
         self.msg.grid(column=1, row=0)
+
+    def callWelcome(self, token=None):
+        self.search2.destroy ()
+        self.locationBox.destroy()
+        self.box2.destroy()
+        self.msg.destroy()
+        self.button3.destroy()
+        window = Welcome2.Window(token=token)
+        window.mainloop ()
+        # print(self.token)
+        # # root=Tk()
+        # self.destroy()
+        # win = Welcome2.Window(self.token, None)
+        # win.mainloop()
 
     def comboLocation(self):
         # print(self.token)
@@ -108,6 +123,7 @@ class ListThings(Frame):
             selected = [a for a in self.b if a.loca_room == self.locationBox.get ()]
             dados = things.searchThingsInactivesByLocation (self.token, str (selected[0].loca_id))
 
+        self.car_list.clear()
         for b in dados:
             # print(b.code_things, b.description, b.location, b.state)
             self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
@@ -128,7 +144,7 @@ class ListThings(Frame):
             things = Things
             dados = things.searchThingsByLocation (self.token, str (selected[0].loca_id))
 
-
+            self.car_list.clear()
             for b in dados:
                 # print(b.code_things, b.description, b.location, b.state)
                 self.car_list.append ([b.code_things, b.description, b.location['loca_room'], b.tag_activated])
@@ -198,7 +214,7 @@ car_list = []
 #     ('5321', 'Chair', 'Lab.3', 'Active'),
 #     ('4642', 'Screen', 'Lab.3', 'Active')]
 
-if __name__ == '__main__':
-    root = Tk()
-    app = ListThings(root)
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = Tk()
+#     app = ListThings(root)
+#     root.mainloop()
